@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SignIn</title>
+    <% include ../template/head.ejs %>
+</head>
+<body>
+    <div class="container-fluid fill">
+        <% include ../template/header.ejs %>
+        <% include ../template/user-navigation.ejs %>
+        <div class="main-wrap">
+            <div class="row main">
+                <% include ../template/site-navigation.ejs %>
+                <div class="col-sm-10  main-content">
+                    <div id="flow">Home / Sign In</div>
+                    <div id="content">
+                            <div class="jumbotron">
+                                <form action='./signin' method="POST">
+                                    <div class="row">
+                                        <label for="email"><b>Email id</b></label><br/>
+                                    </div>
+                                    <div class="row">
+                                        <input type="email" class="form-control" placeholder="Enter Email ID" name="email" required><br/>
+                                    </div>
+                                    <div class="row">
+                                        <label for="psw"><b>Password</b></label><br/>
+                                    </div>
+                                    <div class="row">
+                                        <input type="password" class="form-control" placeholder="Enter Password" name="psw" required><br/>
+                                    </div>
+                                    <% if(error) {%>
+                                    <div class="forgot row">
+                                        * Either Email Address or Password is incorrect. Please try again
+                                    </div>
+                                    <% } %>
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-primary">Login</button>
+                                    </div><br/>
+                                    <div class="row">
+                                        <div>Don't have an account ? <a href="./register">Register</a></div>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <% include ../template/footer.ejs %>
+    </div>
+</body>
+
+</html>

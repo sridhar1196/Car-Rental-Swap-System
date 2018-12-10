@@ -1,0 +1,170 @@
+body, html, .container-fluid {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.photo-head{
+    height:25%;
+}
+
+.logo_class{
+    height:100%;
+    width:12%;
+    float: left;
+}
+
+.span_rating{
+    cursor:pointer;
+}
+
+.hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/images/180160394.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    float: left;
+    height: 100%;
+    width:88%;
+    background-size: cover;
+    position: relative;
+}
+
+#logo_img{
+    height: 100%;
+    width:100%
+}
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+
+.navbar {
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+
+.navbar-default{
+    margin: 0px -15px 0px -15px;
+}
+
+.navbar-nav{
+    text-align: center;
+}
+
+.main{
+    height: 100%;
+}
+.jumbotron {
+    border-radius: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.main-login{
+    position: absolute; /* or absolute */
+    margin: auto;
+    top: 50%;
+    left: 35%;
+    height: 100%;
+    width: 100%;    
+}
+
+.navbar-nav > li {
+      float: none;
+      display: inline-block;
+}
+
+.container-fluid {
+    overflow: auto;
+}
+
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+    height:8%;
+}
+
+.main-wrap{
+    height: 67%;
+    margin-top: -20px;
+}
+
+@media only screen and (max-width: 767px) {
+    .main-wrap{
+        height: auto;
+        margin-top: -20px;
+    }
+    .main{
+        height: auto;
+    }
+    
+    .cate-images{
+        width: auto;
+        padding: 5px;
+        float: left;
+    }
+
+    .jumbotron{
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    
+}
+
+.back{
+    padding-right: 10px;
+    float: right;
+}
+
+.main-nav {
+    padding-top: 10px;
+    background-color: rgb(199, 194, 194);
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.main-nav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #1f1b1b;
+    display: block;
+}
+
+.main-nav a:hover {
+    color: #f1f1f1;
+}
+
+.cate-images{
+    width: 25%;
+    float: left;
+    padding: 5px;
+}
+
+.items_image{
+    width: 250px;
+    height: 180px;
+}
+
+.data-content{
+    margin: 10px 10px 10px 10px;
+}
+
+.data-rate{
+    margin: 0px 0px 0px 0px;
+}
+
+.checked {
+    color: orange;
+}
+
+.type_cars{
+    text-transform: uppercase;
+}
+

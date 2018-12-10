@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">   
+            <ul class="nav navbar-nav">
+                <li>
+                    <% if(userFirstName != ""){ %>
+                        <a href="./myItems?action=signout">
+                            Signout
+                        </a>
+                    <% } else { %>
+                        <a href="./myItems?action=signin">
+                            Sign In
+                        </a>
+                    <% } %>
+                </a></li>
+                <li><a href="./myItems">My Cars</a></li>
+                <li><a href="./mySwaps">My Swaps</a></li>
+                <li><a href="#">Cart</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
+                <% if(userFirstName != ""){ %>
+                    <li><a>Welcome <%= userFirstName %></a></li>
+                <% } else { %>
+                    <li><a>Not Signed In</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>

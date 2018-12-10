@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <% include ../template/head.ejs %>
+</head>
+<body>
+    <div class="container-fluid fill">
+        <% include ../template/header.ejs %>
+        <% include ../template/user-navigation.ejs %>
+        <div class="main-wrap">
+            <div class="row main">
+                <% include ../template/site-navigation.ejs %>
+                <div class="col-sm-10 main-content">
+                    <div id="flow">Home / MyCars</div>
+                    <div id="content">
+                        <h3><b><%= userFirstName %>'s Cars for swap</b></h3>
+                        <% if(userProfile.userItems.length > 0){ %>
+                        
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                    <th>Car</th>
+                                    <th>Category</th>
+                                    <th>My Rating</th>
+                                    <th>Swapped</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(i=0; i < userProfile.userItems.length;i++){ %>
+                                        <tr>
+                                            <td>
+                                                <a href="<%= "./item?itemCode=" + userProfile.userItems[i].item.ItemCode  %>">
+                                                    <%= userProfile.userItems[i].item.ItemName %>
+                                                </a>
+                                            </td>
+                                            <td><%= userProfile.userItems[i].item.CatalogCategory %></td>
+                                            <td class="rating">
+                                                <% for(j=0;j < userProfile.userItems[i].rating;j++){ %>
+                                                    <span class="fa fa-star checked"></span>
+                                                <% } %>
+                                                <% for(j=0;j < (5 - userProfile.userItems[i].rating);j++){ %>
+                                                    <span class="fa fa-star"></span>
+                                                <% } %>
+                                            </td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-sm-1">
+                                                        <% if(userProfile.userItems[i].status == "swapped"){ %>
+                                                            <span class="fa fa-check-square"></span>
+                                                        <% } else if(userProfile.userItems[i].status == "pending"){  %>
+                                                            <span class="fa fa-exchange"></span>
+                                                        <% } %>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <a href="./myItems?action=update&theItem=<%= userProfile.userItems[i].item.ItemCode %>">
+                                                            <div class="btn btn-primary">
+                                                                Update
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <a href="./myItems?action=delete&theItem=<%= userProfile.userItems[i].item.ItemCode %>">
+                                                            <div class="btn btn-primary">
+                                                                Delete
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                            <% if(!success){ %>
+                                <div>
+                                    **<%= error %>
+                                </div>
+                            <% } %>
+                        <% } else { %>
+                            <div>
+                                No Items available to display
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <% include ../template/footer.ejs %>
+    </div>
+</body>
+
+</html>

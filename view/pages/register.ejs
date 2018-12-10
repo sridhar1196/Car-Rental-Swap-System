@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SignIn</title>
+    <% include ../template/head.ejs %>
+</head>
+<body>
+    <div class="container-fluid fill">
+        <% include ../template/header.ejs %>
+        <% include ../template/user-navigation.ejs %>
+        <div class="main-wrap">
+            <div class="row main">
+                <% include ../template/site-navigation.ejs %>
+                <div class="col-sm-10  main-content">
+                    <div id="flow">Home / Sign In</div>
+                    <div>
+                        <!-- <div class="container"> -->
+                            <form action="./register" method="POST">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="First Name" name="first_name" required><br/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Last Name" name="last_name" required><br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Address 1" name="add1" required><br/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Address 2" name="add2"><br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="City" name="city" required><br/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="State" name="state" required><br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Country" name="country" required><br/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Postcode" name="postcode" required><br/>
+                                        </td>
+                                    </tr>                                    
+                                    <tr>
+                                        <td>
+                                            <input type="email" class="form-control" placeholder="Email ID" name="email" required><br/>
+                                        </td>
+                                    </tr>                                    
+                                    <tr>
+                                        <td>
+                                            <input type="password" class="form-control" placeholder="Password" name="password" required><br/>
+                                        </td>
+                                        <td>
+                                            <input type="password" class="form-control" placeholder="Confirm Password" name="conf_password" required><br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <% if(error) {%>
+                                                <div class="forgot">
+                                                    <%= showError %>
+                                                </div>
+                                            <% } %>
+                                        </td>
+                                    </tr>                                    
+                                    <tr>
+                                        <td>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <% include ../template/footer.ejs %>
+    </div>
+</body>
+
+</html>

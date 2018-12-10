@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Item</title>
+    <% include ../template/head.ejs %>
+</head>
+<body>
+    <div class="container-fluid fill">
+        <% include ../template/header.ejs %>
+        <% include ../template/user-navigation.ejs %>
+        <div class="main-wrap">
+            <div class="row main">
+                <% include ../template/site-navigation.ejs %>
+                <div class="col-sm-10 main-content">
+                    <div id="flow">Home / Categories / Items</div>
+                        <div class="row back">
+                            <button onclick="goBack()" class="btn btn-primary">Back</button>
+                        </div>
+                        <div class="row">
+                            <% if(found) { %>
+                                <div id="content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <img src=<%= car.ImageURL %> class="items_image" alt="Toyato Corolla">
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h3><b><%= car.ItemName %></b></h3>
+                                            <div>
+                                                <% for(i = 0; i < car.Rating; i++) { %>
+                                                    <span class="fa fa-star checked"></span>
+                                                <% } %>
+                                                <% for(i = 0; i < (5 - car.Rating); i++) { %>
+                                                    <span class="fa fa-star"></span>
+                                                <% } %>
+                                            </div>
+                                            <% if(status != ""){ %>
+                                                <% if(status == 'swapped'){ %>
+                                                    <div>
+                                                        <span class="fa fa-recycle"></span>
+                                                        <b>
+                                                            You've swapped this item
+                                                        </b>
+                                                    </div>
+                                                <% } %>
+                                                <% if(status == 'pending'){ %>
+                                                    <div>
+                                                        <span class="fa fa-recycle"></span>
+                                                        <b>
+                                                            You've a swap offer for this item
+                                                        </b>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary"  onclick="location.href='./myItems?action=update&theItem=<%= car.ItemCode %>'">See the offer</button>
+                                                <% } %>
+                                            <% } %>
+                                            <p><%= car.Description %></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="data-content">
+                                    <% if(status == ""){ %>
+                                        <button type="submit" class="btn btn-primary" onclick="location.href='./myItems?action=offer&theItem=<%= car.ItemCode %>'"><i class="fa fa-exchange" aria-hidden="true"></i>  Swap it</button>
+                                    <% } %>
+                                    <button type="submit" class="btn btn-primary data-rate"  onclick="location.href='./rating?theItem=<%= car.ItemCode %>'"><i class="fa fa-star" aria-hidden="true"></i> Rate it</button>
+                                </div>
+                                <% if(error){ %>
+                                    <div class="data-content">
+                                        <b>
+                                            <%= availableItemError %>
+                                        </b>
+                                    </div>
+                                <% } %>
+                            <% } else { %>
+                                <p>Requested Item not found</p>
+                            <% } %>
+                        </div>
+                </div>
+            </div>
+        </div> 
+        <% include ../template/footer.ejs %>
+    </div>
+</body>
+
+</html>

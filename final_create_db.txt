@@ -1,0 +1,171 @@
+use cccDB
+
+db.createCollection('users');
+
+db.createCollection('items');
+
+db.createCollection('swaps');
+
+db.createCollection('offers');
+
+db.users.insert([
+{
+        "_id" : 1,
+        "FirstName" : "Sridhar",
+        "LastName" : "Ramesh Babu",
+        "Email" : "sridharramesh92@gmail.com",
+        "Add1" : "9613 Grove Crest Lane",
+        "Add2" : "Apt 1724",
+        "City" : "Charlotte",
+        "State" : "NC",
+        "PostCode" : 28262,
+	"Password" : "sridhar@92",
+        "Country" : "USA"
+},
+{
+        "_id" : 2,
+        "FirstName" : "Kedar",
+        "LastName" : "Kurnool",
+        "Email" : "kkkg@gmail.com",
+        "Add1" : "9613 Grove Crest Lane",
+        "Add2" : "Apt 1724",
+        "City" : "Charlotte",
+        "State" : "NC",
+        "PostCode" : 28262,
+	"Password" : "kedar@92",
+        "Country" : "USA"
+},
+{
+        "_id" : 3,
+        "FirstName" : "Vishnu",
+        "LastName" : "Yandrapati",
+        "Email" : "vishnuyandrapti@gmail.com",
+        "Add1" : "9613 Grove Creet Lane",
+        "Add2" : "Apt 1734",
+        "City" : "Charlotte",
+        "State" : "NC",
+        "PostCode" : 28262,
+	"Password" : "vishnu@92",
+        "Country" : "USA"
+},
+{
+        "_id" : 4,
+        "FirstName" : "Laukik",
+        "LastName" : "Karnavat",
+        "Email" : "laukikkarnavat@gmail.com",
+        "Add1" : "9604 Grove Creet Lane",
+        "Add2" : "Apt 1124",
+        "City" : "Charlotte",
+        "State" : "NC",
+        "PostCode" : 28262,
+	"Password" : "laukik@92",
+        "Country" : "USA"
+}
+]);
+
+
+db.items.insert([
+{
+        "_id" : 1,
+        "ItemCode" : "toyato_corolla",
+        "ItemName" : "Toyato Corolla",
+        "CatalogCategory" : "Sedan",
+        "Description" : "The Toyota Corolla is a line of subcompact and compact cars manufactured by Toyota. Introduced in 1966, the Corolla was the best-selling car worldwide by 1974 and has been one of the best-selling cars in the world since then. In 1997, the Corolla became the best selling nameplate in the world, surpassing the Volkswagen Beetle.",
+        "Rating" : 4,
+        "ImageURL" : "/assets/images/toyato_corolla.png",
+        "Status" : "available",
+        "Initiated" : 0,
+        "UserRating" : 4,
+        "UserID" : 1
+},
+{
+        "_id" : 2,
+        "ItemCode" : "honda_accord",
+        "ItemName" : "Honda Accord",
+        "CatalogCategory" : "Sedan",
+        "Description" : "The Honda Accord is a series of automobiles manufactured by Honda since 1976, best known for its four-door sedan variant, which has been one of the best-selling cars in the United States since 1989. The Accord nameplate has been applied to a variety of vehicles worldwide, including coupes, wagons, hatchbacks, and a crossover.",
+        "Rating" : 3,
+        "ImageURL" : "/assets/images/honda_accord.png",
+        "Status" : "available",
+        "Initiated" : 0,
+        "UserRating" : 3,
+        "UserID" : 2
+},
+{
+        "_id" : 3,
+        "ItemCode" : "ford_fusion",
+        "ItemName" : "Ford Fusion",
+        "CatalogCategory" : "Sedan",
+        "Description" : "The Ford Fusion is a four-door, five passenger mid-size sedan manufactured and marketed by Ford across three generations in gasoline, gas/electric hybrid, and gas/plug-in electric hybrid variants. Introduced for model year 2006, the Fusion is manufactured at Ford's Hermosillo Stamping & Assembly plant in Sonora, Mexico along with its rebadged variant the Lincoln MKZ — and formerly with its now discontinued rebadged variant, the Mercury Milan, all sharing the CD3 platform.",
+        "Rating" : 2,
+        "ImageURL" : "/assets/images/ford_fusion.png",
+        "Status" : "available",
+        "Initiated" : 0,
+        "UserRating" : 2,
+        "UserID" : 3
+},
+{
+        "_id" : 4,
+        "ItemCode" : "hyundai_accent",
+        "ItemName" : "Hyundai Accent",
+        "CatalogCategory" : "Sedan",
+        "Description" : "The Hyundai Accent , or Hyundai Verna in South Korea, is a subcompact car produced by Hyundai. In Australia, the first generation models carried over the Hyundai Excel name used by the Accent's predecessor. The Accent was replaced in 2000 by the Hyundai Verna in South Korea, although most international markets, including the USA, retained the 'Accent' name.",
+        "Rating" : 3,
+        "ImageURL" : "/assets/images/hyundai_accent.png",
+        "Status" : "available",
+        "Initiated" : 0,
+        "UserRating" : 3,
+        "UserID" : 1
+},
+{
+        "_id" : 5,
+        "ItemCode" : "honda_crv",
+        "ItemName" : "Honda CR-V",
+        "CatalogCategory" : "SUV",
+        "Description" : "The Honda CR-V is a compact crossover SUV manufactured by Honda since 1995 and introduced in the North American market in 1997. It uses the Honda Civic platform with an SUV body design. The CR-V is Honda's mid-range utility vehicle, slotting between the smaller HR-V and the larger Pilot. Honda states 'CR-V' stands for 'Comfortable Runabout Vehicle' while the term 'compact Recreational Vehicle' is used in a British car review article that was republished by Honda.",
+        "Rating" : 5,
+        "ImageURL" : "/assets/images/honda_crv.png",
+        "Status" : "available",
+        "Initiated" : 0,
+        "UserRating" : 5,
+        "UserID" : 1
+},
+{
+        "_id" : 6,
+        "ItemCode" : "honda_pilot",
+        "ItemName" : "Honda Pilot",
+        "CatalogCategory" : "SUV",
+        "Description" : "The Honda Pilot is a mid-size crossover SUV manufactured by Honda and introduced in 2002.Primarily aimed at the North American market, the Pilot is the largest SUV from Honda and features three-row seating. Pilots are currently manufactured in Lincoln, Alabama, and the Pilot was produced in Alliston, Ontario until April 2007. The first generation Pilot was released in April 2002 as a 2003 model.",
+        "Rating" : 4,
+        "ImageURL" : "/assets/images/honda_pilot.png",
+        "Status" : "available",
+        "Initiated" : 0,
+        "UserRating" : 4,
+        "UserID" : 2
+},
+{
+        "_id" : 7,
+        "ItemCode" : "ford_escape",
+        "ItemName" : "Ford Escape",
+        "CatalogCategory" : "SUV",
+        "Description" : "The Ford Escape is a compact crossover vehicle sold by Ford since 2000 over three generations. Ford released the original model in 2000 for the 2001 model year—a model jointly developed and released with Mazda of Japan—who took a lead in the engineering of the two models and sold their version as the Mazda Tribute.",
+        "Rating" : 2,
+        "ImageURL" : "/assets/images/ford_escape.png",
+        "Status" : "available",
+        "Initiated" : 0,
+        "UserRating" : 2,
+        "UserID" : 3
+},
+{
+        "_id" : 8,
+        "ItemCode" : "toyota_rav4",
+        "ItemName" : "Toyota RAV4",
+        "CatalogCategory" : "SUV",
+        "Description" : "The Toyota RAV4 is a compact crossover SUV (sport utility vehicle) produced by the Japanese automobile manufacturer Toyota. This was the first compact crossover SUV; it made its debut in Japan and Europe in 1994, and in North America in 1995. The vehicle was designed for consumers wanting a vehicle that had most of the benefits of SUVs, such as increased cargo room, higher visibility, and the option of full-time four-wheel drive, along with the maneuverability and fuel economy of a compact car.",
+        "Rating" : 4,
+        "ImageURL" : "/assets/images/toyota_rav4.png",
+        "Status" : "available",
+        "Initiated" : 0,
+        "UserRating" : 4,
+        "UserID" : 4
+}]);

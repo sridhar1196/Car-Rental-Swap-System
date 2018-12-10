@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contact</title>
+    <% include ../template/head.ejs %>
+</head>
+<body>
+    <div class="container-fluid fill">
+        <% include ../template/header.ejs %>
+        <% include ../template/user-navigation.ejs %>
+        <div class="main-wrap">
+            <div class="row main">
+                <% include ../template/site-navigation.ejs %>
+                <div class="col-sm-10 main-content">
+                    <div id="flow">Home / Contact us</div>
+                    <div id="content">
+                            <div class="container-fluid bg-grey">
+                                    <h2 class="text-center">CONTACT</h2>
+                                    <div class="row">
+                                      <div class="col-sm-5">
+                                        <p>Contact us by entering your name, email id. We will get back to you.</p>
+                                        <p><span class="fa fa-map-marker"></span> Charlotte, NC</p>
+                                        <p><span class="fa fa-mobile"></span> +1 xxx-xxx-xxxx</p>
+                                        <p><span class="fa fa-envelope"></span> sramesh4@uncc.edu</p>
+                                      </div>
+                                      <div class="col-sm-7 slideanim">
+                                        <div class="row">
+                                          <div class="col-sm-6 form-group">
+                                            <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                                          </div>
+                                          <div class="col-sm-6 form-group">
+                                            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                                          </div>
+                                        </div>
+                                        <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+                                        <div class="row">
+                                          <div class="col-sm-12 form-group">
+                                            <button class="btn btn-primary pull-right" type="submit">Send</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <% include ../template/footer.ejs %>
+    </div>
+</body>
+
+</html>
