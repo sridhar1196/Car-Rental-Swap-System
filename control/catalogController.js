@@ -23,132 +23,142 @@ var catalogController = function(app, itemsDB, usersDB, swapDB, offerDB, feedbac
         itemDB.getUniqueCategory(itemsDB, function(error, docs){
             if(!error){
                 categories = docs;
+                if(theUser == undefined){
+                    // User is not logged in
+                    if(req.query.catalogCategory == undefined){
+                        res.render('pages/categories', {
+                            found: false,
+                            userFirstName: "",
+                            userLastName: "",
+                            type: categories
+                        });
+                    } else {
+                        // Fetch all the items based on the selected category
+                        itemDB.getCategory(itemsDB, req.query.catalogCategory, function(error1, value){
+                            if(!error1 && value.length > 0){
+                                var arrayVal = [];
+                                var newCategoryValue =  [];
+                                var category = value[0].CatalogCategory;
+                                for(var i=0;i<value.length;i++){
+                                    if(category != value[i].CatalogCategory){
+                                        arrayVal.push({
+                                            category: category,
+                                            value: newCategoryValue
+                                        });
+                                        category = value[i].CatalogCategory
+                                        var newCategoryValue = [];
+                                        newCategoryValue.push(value[i]);
+                                    } else {
+                                        newCategoryValue.push(value[i]);
+                                    }
+                                }
+                                arrayVal.push({
+                                    category: category,
+                                    value: newCategoryValue
+                                });
+                                // Sending all the items related to the category
+                                res.render('pages/categories', {
+                                    found: true,
+                                    userFirstName: "",
+                                    userLastName: "",
+                                    type: categories,
+                                    cars: arrayVal
+                                });
+                            } else {
+                                // In case of fetch error, categories page is triggered again
+                                res.render('pages/categories', {
+                                    found: false,
+                                    userFirstName: "",
+                                    userLastName: "",
+                                    type: categories
+                                }); 
+                            }
+                        });
+                    }
+                } else {
+                    var userID = theUser.user_id;
+                    var userProfile = new userProfiles(req.session.currentProfile.userID);
+                    // Fetching user profile based on user id
+                    userProfile.setUserItem(req.session.currentProfile.userItems);
+                    // Categories is not defined then the categories page is triggered
+                    console.log('Category:',req.query.catalogCategory);
+                    if(req.query.catalogCategory == undefined){
+                        categories = [];
+                        itemDB.getUniqueCategory(itemsDB, function(error, docs){
+                            if(!error){
+                                categories = docs;
+                            }
+                            res.render('pages/categories', {
+                                found: false,
+                                userFirstName: theUser.first_name,
+                                userLastName: theUser.last_name,
+                                type: categories
+                            });
+                        });
+                    } else {
+                        // Fetch the items based on category and user id
+                        itemDB.filterCategory(itemsDB, req.query.catalogCategory, userProfile.userID, function(error2, value){
+                            console.log("Error2:",error2);
+                            console.log("Value:",value);
+                            if(error2 || value.length == 0){
+                                res.render('pages/categories', {
+                                    found: false,
+                                    userFirstName: theUser.first_name,
+                                    userLastName: theUser.last_name,
+                                    type: categories
+                                }); 
+                            } else {
+                                var arrayVal = [];
+                                var category = value[0].CatalogCategory;
+                                var newCategoryValue =  [];
+                                for(var i=0;i<value.length;i++){
+                                    if(category != value[i].CatalogCategory){
+                                        arrayVal.push({
+                                            category: category,
+                                            value: newCategoryValue
+                                        });
+                                        category = value[i].CatalogCategory
+                                        var newCategoryValue = [];
+                                        newCategoryValue.push(value[i]);
+                                    } else {
+                                        newCategoryValue.push(value[i]);
+                                    }
+                                }
+                                arrayVal.push({
+                                    category: category,
+                                    value: newCategoryValue
+                                });
+                                // Fetching all the values are save it in arrayVal for showing it in categories
+                                res.render('pages/categories', {
+                                    found: true,
+                                    type: categories,
+                                    userFirstName: theUser.first_name,
+                                    userLastName: theUser.last_name,
+                                    cars: arrayVal
+                                });
+                            }
+                        });
+                    }
+                }
+        
+            } else {
+                if(theUser == undefined){
+                    res.render('pages/register', {
+                        userFirstName: "",
+                        userLastName: "",
+                        error:false
+                    });
+                } else {
+                    res.render('pages/index', {
+                        userFirstName: theUser.first_name,
+                        error:false,
+                        userLastName: theUser.last_name
+                    });
+                }
             }
         });
         console.log(categories);
-        // Check whether the user has logged in or not
-        if(theUser == undefined){
-            // User is not logged in
-            if(req.query.catalogCategory == undefined){
-                categories = [];
-                // If both categories and user is not defined then categories page is triggered
-                itemDB.getUniqueCategory(itemsDB, function(error, docs){
-                    if(!error){
-                        categories = docs;
-                    }
-                    res.render('pages/categories', {
-                        found: false,
-                        userFirstName: "",
-                        userLastName: "",
-                        type: categories
-                    });
-                });
-            } else {
-                // Fetch all the items based on the selected category
-                itemDB.getCategory(itemsDB, req.query.catalogCategory, function(error1, value){
-                    if(!error1 && value.length > 0){
-                        var arrayVal = [];
-                        var newCategoryValue =  [];
-                        var category = value[0].CatalogCategory;
-                        for(var i=0;i<value.length;i++){
-                            if(category != value[i].CatalogCategory){
-                                arrayVal.push({
-                                    category: category,
-                                    value: newCategoryValue
-                                });
-                                category = value[i].CatalogCategory
-                                var newCategoryValue = [];
-                                newCategoryValue.push(value[i]);
-                            } else {
-                                newCategoryValue.push(value[i]);
-                            }
-                        }
-                        arrayVal.push({
-                            category: category,
-                            value: newCategoryValue
-                        });
-                        // Sending all the items related to the category
-                        res.render('pages/categories', {
-                            found: true,
-                            userFirstName: "",
-                            userLastName: "",
-                            type: categories,
-                            cars: arrayVal
-                        });
-                    } else {
-                        // In case of fetch error, categories page is triggered again
-                        res.render('pages/categories', {
-                            found: false,
-                            userFirstName: "",
-                            userLastName: "",
-                            type: categories
-                        }); 
-                    }
-                });
-            }
-        } else {
-            var userID = theUser.user_id;
-            var userProfile = new userProfiles(req.session.currentProfile.userID);
-            // Fetching user profile based on user id
-            userProfile.setUserItem(req.session.currentProfile.userItems);
-            // Categories is not defined then the categories page is triggered
-            if(req.query.catalogCategory == undefined){
-                categories = [];
-                itemDB.getUniqueCategory(itemsDB, function(error, docs){
-                    if(!error){
-                        categories = docs;
-                    }
-                    res.render('pages/categories', {
-                        found: false,
-                        userFirstName: theUser.first_name,
-                        userLastName: theUser.last_name,
-                        type: categories
-                    });
-                });
-            } else {
-                // Fetch the items based on category and user id
-                itemDB.filterCategory(itemsDB, req.query.catalogCategory, userProfile.userID, function(error2, value){
-                    if(error2 || value.length == 0){
-                        res.render('pages/categories', {
-                            found: false,
-                            userFirstName: theUser.first_name,
-                            userLastName: theUser.last_name,
-                            type: categories
-                        }); 
-                    } else {
-                        var arrayVal = [];
-                        var category = value[0].CatalogCategory;
-                        var newCategoryValue =  [];
-                        for(var i=0;i<value.length;i++){
-                            if(category != value[i].CatalogCategory){
-                                arrayVal.push({
-                                    category: category,
-                                    value: newCategoryValue
-                                });
-                                category = value[i].CatalogCategory
-                                var newCategoryValue = [];
-                                newCategoryValue.push(value[i]);
-                            } else {
-                                newCategoryValue.push(value[i]);
-                            }
-                        }
-                        arrayVal.push({
-                            category: category,
-                            value: newCategoryValue
-                        });
-                        // Fetching all the values are save it in arrayVal for showing it in categories
-                        res.render('pages/categories', {
-                            found: true,
-                            type: categories,
-                            userFirstName: theUser.first_name,
-                            userLastName: theUser.last_name,
-                            cars: arrayVal
-                        });
-                    }
-                });
-            }
-        }
-        
+        // Check whether the user has logged in or not        
     });
     
     // GET method for Item page
@@ -252,7 +262,7 @@ var catalogController = function(app, itemsDB, usersDB, swapDB, offerDB, feedbac
                                                     error: false,
                                                     userFirstName: theUser.first_name,
                                                     userLastName: theUser.last_name,
-                                                    status: docs3[0].Status,
+                                                    status: "None",
                                                     car: docs3[0]
                                                 });
                                             } else {

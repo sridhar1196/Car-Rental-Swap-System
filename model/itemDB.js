@@ -166,7 +166,7 @@ function filterCategory(itemsDB, catalogCategory, userID, callback){
         });
     } else {
         cars = [];
-        itemsDB.find({CatalogCategory: catalogCategory, UserID:{$ne: userID}, Status: "available"},function(err, docs){
+        itemsDB.find({CatalogCategory: catalogCategory, UserID:{$ne: userID}, Status: {$ne: "pending"}},function(err, docs){
         // itemsDB.find({CatalogCategory: catalogCategory, UserID:{$ne: userID}, Status: {$ne: "pending"}},function(err, docs){
             if(!err){
                 for(var i=0;i<docs.length;i++){

@@ -212,7 +212,24 @@ function checkUserProfileSwapItem(itemsDB, swapDB, userProfile, itemID, callback
                     }
                 });
             } else {
-                callback(true, null);
+                swapDB.find({SwapUserID: userid, ItemCode: itemID},function(err1, docs1){
+                    if(!err1 && docs1.length > 0){
+                        itemsDB.find({UserID: docs1[0].UserID, ItemCode: itemID},function(err2, docs2){
+                            let cars = [];
+                            if(!err2 && docs2.length > 0){
+                                // categories = [];
+                                for(var i=0;i<docs2.length;i++){
+                                    cars.push(docs2[i]);
+                                }
+                                callback(false, cars);
+                            } else {
+                                callback(true, cars);
+                            }
+                        });
+                    } else {
+                        callback(true, cars);
+                    }
+                });
             }
         });
     } else {
